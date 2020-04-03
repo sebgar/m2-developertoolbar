@@ -1,0 +1,14 @@
+{
+    "name": "sebgar/m2-developertoolbar",
+    "type": "library",
+    "description": "Magento 2 Developer Toolbar",
+    "authors": [
+        {
+            "name": "Sebastien Garrouste",
+            "email": "sebastien.garrouste@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    }
+}
