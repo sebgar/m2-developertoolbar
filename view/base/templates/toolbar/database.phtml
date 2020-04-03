@@ -1,0 +1,55 @@
+<?php
+/* @var $block \Sga\DeveloperToolbar\Block\Toolbar\Database */
+$queries = $block->getQueries();
+$multipleQueries = $block->getMultipleQueries();
+?>
+<div class="dtt-tabs">
+    <ul>
+        <li class="dtt-tab" data-tab="#dtt_tab_queries">Queries (<?= count($queries) ?>)</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_multiple_queries">Multiple Queries (<?= count($multipleQueries) ?>)</li>
+    </ul>
+
+    <p><?= $block->max ?> queries, <?= $this->nbUnique ?> unique, <?= $block->nbMultiple ?> multiple</p>
+
+    <div id="dtt_tab_queries" class="dtt-tab-container dtt-database-queries">
+        <table class="dtt-table">
+            <thead>
+            <tr>
+                <th>Sql</th>
+                <th>Total Time (sec)</th>
+                <th>Call Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($queries as $query): ?>
+                <tr>
+                    <td><?= $block->formatSql($query['sql']) ?></td>
+                    <td><?= $block->roundNumber($query['time'], 4) ?></td>
+                    <td><?= $query['nb'] ?></td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="dtt_tab_multiple_queries" class="dtt-tab-container dtt-database-multiple-queries">
+        <table class="dtt-table">
+            <thead>
+            <tr>
+                <th>Sql</th>
+                <th>Total Time (sec)</th>
+                <th>Call Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($multipleQueries as $multipleQuery): ?>
+                <tr>
+                    <td><?= $block->formatSql($multipleQuery['sql']) ?></td>
+                    <td><?= $block->roundNumber($multipleQuery['time'], 4) ?></td>
+                    <td><?= $multipleQuery['nb'] ?></td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</div>

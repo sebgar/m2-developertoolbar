@@ -1,0 +1,56 @@
+<?php
+/* @var $block \Sga\DeveloperToolbar\Block\Toolbar\Models */
+$models = $block->getModels();
+$collections = $block->getCollections();
+?>
+<div class="dtt-tabs">
+    <ul>
+        <li class="dtt-tab" data-tab="#dtt_tab_models">Models (<?= count($models) ?>)</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_collections">Collections (<?= count($collections) ?>)</li>
+    </ul>
+
+    <div id="dtt_tab_models" class="dtt-tab-container dtt-models">
+        <table class="dtt-table">
+            <thead>
+            <tr>
+                <th>Model</th>
+                <th>Call Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($models as $model): ?>
+                <tr>
+                    <td><?= $model['class'] ?></td>
+                    <td><?= $model['nbr'] ?></td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="dtt_tab_collections" class="dtt-tab-container dtt-collections">
+        <table class="dtt-table">
+            <thead>
+            <tr>
+                <th>Collection</th>
+                <th>Call Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($collections as $collection): ?>
+                <tr>
+                    <td>
+                        <span class="class open-children"><?= $collection['class'] ?></span>
+                        <ul class="children" style="display:none">
+                            <?php foreach ($collection['queries'] as $query): ?>
+                                <li class="query"><?= $query ?></li>
+                            <?php endforeach ?>
+                        </ul>
+                    </td>
+                    <td><?= $collection['nbr'] ?></td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</div>

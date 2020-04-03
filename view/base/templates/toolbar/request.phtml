@@ -1,0 +1,131 @@
+<?php
+/* @var $block \Sga\DeveloperToolbar\Block\Toolbar\Request */
+$request = $block->getRequest();
+$website = $block->getWebsite();
+$store = $block->getStore();
+?>
+
+<div class="dtt-panel">
+    <div class="title">Request</div>
+    <table class="dtt-table">
+        <tr>
+            <th>Website</th>
+            <td><?= $website->getName().' / code : '.$website->getCode().' / id : '.$website->getId() ?></td>
+        </tr>
+        <tr>
+            <th>Store</th>
+            <td><?= $store->getName().' / code : '.$store->getCode().' / id : '.$store->getId() ?></td>
+        </tr>
+        <tr>
+            <th>Module Name</th>
+            <td><?= $request->getModuleName() ?></td>
+        </tr>
+        <tr>
+            <th>Controller</th>
+            <td><?= $request->getControllerName() ?></td>
+        </tr>
+        <tr>
+            <th>Action</th>
+            <td><?= $request->getActionName() ?></td>
+        </tr>
+        <tr>
+            <th>Full Action</th>
+            <td><?= $request->getFullActionName() ?></td>
+        </tr>
+        <tr>
+            <th>Route</th>
+            <td><?= $request->getRouteName() ?></td>
+        </tr>
+        <tr>
+            <th>Area</th>
+            <td><?= $block->getAppState()->getAreaCode() ?></td>
+        </tr>
+        <tr>
+            <th>Magento Mode</th>
+            <td><?= $block->getAppState()->getMode() ?></td>
+        </tr>
+        <tr>
+            <th>Magento Version</th>
+            <td><?= $block->getProductMetaData()->getVersion() ?></td>
+        </tr>
+        <tr>
+            <th>Client IP</th>
+            <td><?= $request->getClientIp() ?></td>
+        </tr>
+    </table>
+</div>
+
+<div class="dtt-panel">
+    <div class="title">GET Var</div>
+    <table class="dtt-table">
+    <?php if(count($_GET) > 0): ?>
+        <?php foreach($_GET as $key => $value): ?>
+        <tr>
+            <th><?= $key ?></th>
+            <td><pre><?php print_r($value) ?></pre></td>
+        </tr>
+        <?php endforeach ?>
+    <?php else: ?>
+        <tr>
+            <td><?= __('No Data') ?></td>
+        </tr>
+    <?php endif ?>
+    </table>
+</div>
+
+<div class="dtt-panel">
+    <div class="title">POST Var</div>
+    <table class="dtt-table">
+    <?php if(count($_POST) > 0): ?>
+        <?php foreach($_POST as $key => $value): ?>
+        <tr>
+            <th><?= $key ?></th>
+            <td><pre><?php print_r($value) ?></pre></td>
+        </tr>
+        <?php endforeach ?>
+    <?php else: ?>
+        <tr>
+            <td><?= __('No Data') ?></td>
+        </tr>
+    <?php endif ?>
+    </table>
+</div>
+
+<div class="dtt-panel">
+    <div class="title">COOKIE Var</div>
+    <table class="dtt-table">
+    <?php if(count($_COOKIE) > 0): ?>
+        <?php foreach($_COOKIE as $key => $value): ?>
+        <tr>
+            <th><?= $key ?></th>
+            <td><pre><?php print_r($value) ?></pre></td>
+        </tr>
+        <?php endforeach ?>
+    <?php else: ?>
+        <tr>
+            <td><?= __('No Data') ?></td>
+        </tr>
+    <?php endif ?>
+    </table>
+</div>
+
+<div class="dtt-panel">
+    <?php $checked = isset($_COOKIE['xdtb_display_session_var']) && $_COOKIE['xdtb_display_session_var'] == 'true' ? 'checked="checked"' : '' ?>
+    <div class="title"><input type="checkbox" id="display_session_var" value="1" <?= $checked ?> onclick="sgaDeveloperToolbar<?= $this->getRequestKey() ?>.saveCookie('xdtb_display_session_var', this.checked);">&nbsp;SESSION Var</div>
+    <table class="dtt-table">
+    <?php if($checked != ''): ?>
+        <?php if(count($_SESSION) > 0): ?>
+            <?php foreach($_SESSION as $key => $value): ?>
+            <tr>
+                <th><?= $key ?></th>
+                <td><pre><?php print_r($value) ?></pre></td>
+            </tr>
+            <?php endforeach ?>
+        <?php else: ?>
+            <tr>
+                <td><?= __('No Data') ?></td>
+            </tr>
+        <?php endif ?>
+    <?php endif ?>
+    </table>
+</div>

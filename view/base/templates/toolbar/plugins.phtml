@@ -1,0 +1,33 @@
+<?php
+/* @var $block \Sga\DeveloperToolbar\Block\Toolbar\Plugins */
+$plugins = $block->getPlugins();
+?>
+<table class="dtt-table dtt-plugins">
+    <thead>
+        <tr>
+            <th>Types</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($plugins as $type => $methods): ?>
+        <tr>
+            <td>
+                <span class="type open-children"><?= $type ?></span>
+                <ul class="children" style="display:none">
+                <?php foreach ($methods as $method => $prefixes): ?>
+                    <li class="method"><?= $method ?></li>
+                    <?php foreach ($prefixes as $prefix => $plugins): ?>
+                        <li class="prefix"><?= $prefix ?></li>
+                        <?php foreach ($plugins as $sortOrder => $pluginsByOrder): ?>
+                            <?php foreach ($pluginsByOrder as $plugin): ?>
+                                <li class="plugin"><?= $sortOrder.' - '.$plugin['plugin'] ?></li>
+                            <?php endforeach ?>
+                        <?php endforeach ?>
+                    <?php endforeach ?>
+                <?php endforeach ?>
+                </ul>
+            </td>
+        </tr>
+    <?php endforeach ?>
+    </tbody>
+</table>

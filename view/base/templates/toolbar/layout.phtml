@@ -1,0 +1,76 @@
+<?php
+/* @var $block \Sga\DeveloperToolbar\Block\Toolbar\Layout */
+$handles = $block->getHandles();
+$blocks = $block->getBlocksByTime();
+$blocksNotUsed = $block->getBlocksNotUsed();
+?>
+<div class="dtt-tabs">
+    <ul>
+        <li class="dtt-tab" data-tab="#dtt_tab_treeblocks">Tree Blocks</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_blocks">Blocks (<?= count($blocks) ?>)</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_blocks_not_used">Blocks Not Used (<?= count($blocksNotUsed) ?>)</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_handles">Handles (<?= count($handles) ?>)</li>
+    </ul>
+
+    <div id="dtt_tab_treeblocks" class="dtt-tab-container dtt-blocks dtt-tree">
+        <?= $block->getHtmlTreeBlocks() ?>
+    </div>
+
+    <div id="dtt_tab_blocks" class="dtt-tab-container dtt-blocks">
+        <table class="dtt-table">
+            <thead>
+            <tr>
+                <th>Block</th>
+                <th>Time Render (sec)</th>
+                <th>Info</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($blocks as $name => $b): ?>
+                <tr class="<?= isset($b['time']) ? $block->getColorCss($b['time']) : '' ?>">
+                    <td><?= $name ?></td>
+                    <td><?= isset($b['time']) ? $b['time'] : '' ?></td>
+                    <td>
+                        <?= isset($b['identifier']) && $b['identifier'] !== '' ? 'Identifier : '.$b['identifier'].'<br>' : '' ?>
+                        <?= isset($b['lifetime']) && $b['lifetime'] !== '' ? 'Lifetime : '.$b['lifetime'].'<br>' : '' ?>
+                        <?= isset($b['file']) && $b['file'] !== '' ? 'Template : '.$b['file'].'<br>' : '' ?>
+                        <?= isset($b['class_name']) ? 'Class : '.$b['class_name'].'<br>' : '' ?>
+                        <?= isset($b['class_file']) ? 'Class File : '.$b['class_file'].'<br>' : '' ?>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="dtt_tab_blocks_not_used" class="dtt-tab-container dtt-blocks">
+        <table class="dtt-table">
+            <thead>
+            <tr>
+                <th>Block</th>
+                <th>Info</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($blocksNotUsed as $name => $b): ?>
+                <tr>
+                    <td><?= $name ?></td>
+                    <td>
+                        <?= isset($b['file']) ? 'Template : '.$b['file'].'<br>' : '' ?>
+                        <?= isset($b['class_name']) ? 'Class : '.$b['class_name'].'<br>' : '' ?>
+                        <?= isset($b['class_file']) ? 'Class : '.$b['class_file'].'<br>' : '' ?>
+                    </td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="dtt_tab_handles" class="dtt-tab-container dtt-handles">
+        <ul>
+            <?php foreach ($handles as $handle): ?>
+                <li><?= $handle ?></li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+</div>

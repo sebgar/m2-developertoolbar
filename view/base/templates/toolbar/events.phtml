@@ -1,0 +1,66 @@
+<?php
+/* @var $block \Sga\DeveloperToolbar\Block\Toolbar\Events */
+$events = $block->getEvents();
+$nbObservers = 0;
+$observers = [];
+$observersTime = [];
+?>
+<div class="dtt-tabs">
+    <ul>
+        <li class="dtt-tab" data-tab="#dtt_tab_events">Events/Observers</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_observers">Observers</li>
+    </ul>
+
+    <div id="dtt_tab_events" class="dtt-tab-container dtt-events">
+        <table class="dtt-table">
+            <tbody>
+            <?php foreach ($events as $event): ?>
+                <tr class="<?= $block->getColorCss($event['time']) ?>">
+                    <td class="event"><?= $event['event'] ?></td>
+                    <td><?= isset($event['time']) ? $block->roundNumber($event['time']) : '-' ?></td>
+                    <td><?= $event['nbr'] ?></td>
+                </tr>
+                <?php foreach ($block->getEventObservers($event['event']) as $observer): $nbObservers++ ?>
+                    <?php $observers[$event['event'].'::'.$observer['name']] = $observer ?>
+                    <?php $observersTime[$event['event'].'::'.$observer['name']] = $observer['time'] ?>
+                    <tr class="<?= $observer['disabled'] ? 'disabled' : '' ?>">
+                        <td class="observer<?= $block->getColorCss($observer['time']) ?>"><?= $observer['name'] ?> (<?= $observer['instance'] ?>)</td>
+                        <td><?= isset($observer['time']) ? $block->roundNumber($observer['time']) : '-' ?></td>
+                        <td><?= $observer['call_number'] ?></td>
+                    </tr>
+                <?php endforeach ?>
+            <?php endforeach ?>
+            </tbody>
+            <thead>
+            <tr>
+                <th>Event (<?= count($events) ?>) / Observer (<?= $nbObservers ?>)</th>
+                <th>Total Time (sec)</th>
+                <th>Call Number</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+
+    <?php arsort($observersTime) ?>
+    <div id="dtt_tab_observers" class="dtt-tab-container dtt-observers">
+        <table class="dtt-table">
+            <thead>
+            <tr>
+                <th>Observer (<?= count($observersTime) ?>)</th>
+                <th>Total Time (sec)</th>
+                <th>Call Number</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($observersTime as $name => $time): ?>
+                <?php $observer = $observers[$name] ?>
+                <tr class="<?= $observer['disabled'] ? 'disabled' : '' ?>">
+                    <td class="observer<?= $block->getColorCss($observer['time']) ?>"><?= $name ?> (<?= $observer['instance'] ?>)</td>
+                    <td><?= isset($observer['time']) ? $block->roundNumber($observer['time']) : '-' ?></td>
+                    <td><?= $observer['call_number'] ?></td>
+                </tr>
+            <?php endforeach ?>
+            </tbody>
+        </table>
+    </div>
+</div>

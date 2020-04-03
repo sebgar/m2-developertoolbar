@@ -1,0 +1,225 @@
+#dt_container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #3A3A3A;
+  z-index: 1000;
+  display:flex;
+  border-top: 1px solid #CCCCCC;
+
+  // display
+  #dtd {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border-right: 1px solid #1A1A1A;
+    padding: 5px;
+
+    a {
+      color: #FFFFFF;
+      font-weight: bold;
+      font-size:14px;
+      text-decoration: none;
+    }
+  }
+
+  // toolbar
+  .dtt {
+    .dtti-container {
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      list-style: none;
+      height:100%;
+      .dtti {
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size:14px;
+        border-right: 1px solid #1A1A1A;
+        padding:5px 10px;
+
+        &.dtti-has-content {
+          cursor: pointer;
+        }
+        &:last-child{
+          border-right: none;
+        }
+        &.active {
+          border-bottom: 2px solid #0D7BBC;
+        }
+      }
+
+      .dttic {
+        z-index: 1000;
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+        bottom:30px;
+        margin:0;
+        background: #EEEEEE;
+
+        .dttic-head {
+          .close {
+            float:right;
+            margin: 0 10px 0 0;
+          }
+        }
+
+        .dttic-content {
+          position: absolute;
+          top: 40px;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: auto;
+          .scroll {
+            display: block;
+            height: 100%;
+            overflow: scroll;
+            padding: 0 10px;
+          }
+        }
+      }
+    }
+
+    // table
+    .dtt-table {
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid #999999;
+      background: #FFFFFF;
+
+      thead th {
+        background:#000000;
+        color:#FFFFFF;
+        font-weight:bold;
+        padding:5px;
+        white-space: nowrap;
+      }
+      tr {
+        th {
+          font-weight:bold;
+          width:200px;
+          padding:5px;
+        }
+        &:hover {
+          background: #AAAAAA;
+        }
+        td {
+          padding:5px;
+        }
+      }
+    }
+
+    // panel
+    .dtt-panel {
+      margin-bottom:40px;
+      .title {
+        font-weight:bold;
+        margin-bottom:20px;
+      }
+    }
+
+    // tabs
+    .dtt-tabs {
+      & > ul {
+        padding: 0 20px;
+        border-bottom: 1px solid #000000;
+        .dtt-tab {
+          display:inline-block;
+          border-top: 1px solid #000000;
+          border-left: 1px solid #000000;
+          border-right: 1px solid #000000;
+          padding:10px;
+          &.active {
+            background: #cccccc;
+          }
+        }
+      }
+    }
+
+    // tree
+    .dtt-tree {
+      ul {
+        margin-left: 30px;
+        display:none;
+        li {
+          &.has-children {
+            & > .name {
+              font-weight:bold;
+            }
+          }
+        }
+      }
+      .tree-root {
+        display:block;
+      }
+      .icon {
+        margin-right: 5px;
+      }
+      .detail {
+        padding: 0 5px;
+        margin-left: 15px;
+        border: 1px solid #999999;
+        background: #FFFFFF;
+      }
+    }
+
+    // scale
+    .max {
+      color: #FF0000;
+    }
+    .moy {
+      color: #ff7800;
+    }
+    .min {
+      color: #deb700;
+    }
+    .disabled {
+      text-decoration: line-through;
+    }
+
+    // events
+    .dtt-events {
+      td {
+        &.event {
+          font-weight:bold;
+        }
+
+        &.observer {
+          padding-left:30px;
+        }
+      }
+    }
+
+    // collections
+    .dtt-collections {
+      td {
+        .class {
+          font-weight:bold;
+        }
+        .query {
+          padding-left:30px;
+        }
+      }
+    }
+
+    // plugins
+    .dtt-plugins {
+      .type {
+        font-weight:bold;
+      }
+      .method {
+        padding-left:30px;
+      }
+      .prefix {
+        padding-left:60px;
+      }
+      .plugin {
+        padding-left:90px;
+      }
+    }
+  }
+}
