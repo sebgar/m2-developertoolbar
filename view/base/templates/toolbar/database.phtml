@@ -4,52 +4,56 @@ $queries = $block->getQueries();
 $multipleQueries = $block->getMultipleQueries();
 ?>
 <div class="dtt-tabs">
-    <ul>
-        <li class="dtt-tab" data-tab="#dtt_tab_queries">Queries (<?= count($queries) ?>)</li>
-        <li class="dtt-tab" data-tab="#dtt_tab_multiple_queries">Multiple Queries (<?= count($multipleQueries) ?>)</li>
-    </ul>
+    <?php if (count($queries) === 0) : ?>
+        <p>To Enable Database profiler, add "'profiler' => '1'" into "app/etc/env.php" in section "db/connection/default"</p>
+    <?php else : ?>
+        <ul>
+            <li class="dtt-tab" data-tab="#dtt_tab_queries">Queries (<?= count($queries) ?>)</li>
+            <li class="dtt-tab" data-tab="#dtt_tab_multiple_queries">Multiple Queries (<?= count($multipleQueries) ?>)</li>
+        </ul>
 
-    <p><?= $block->max ?> queries, <?= $this->nbUnique ?> unique, <?= $block->nbMultiple ?> multiple</p>
+        <p><?= $block->max ?> queries, <?= $this->nbUnique ?> unique, <?= $block->nbMultiple ?> multiple</p>
 
-    <div id="dtt_tab_queries" class="dtt-tab-container dtt-database-queries">
-        <table class="dtt-table">
-            <thead>
-            <tr>
-                <th>Sql</th>
-                <th>Total Time (sec)</th>
-                <th>Call Number</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($queries as $query): ?>
+        <div id="dtt_tab_queries" class="dtt-tab-container dtt-database-queries">
+            <table class="dtt-table">
+                <thead>
                 <tr>
-                    <td><?= $block->formatSql($query['sql']) ?></td>
-                    <td><?= $block->roundNumber($query['time'], 4) ?></td>
-                    <td><?= $query['nb'] ?></td>
+                    <th>Sql</th>
+                    <th>Total Time (sec)</th>
+                    <th>Call Number</th>
                 </tr>
-            <?php endforeach ?>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                <?php foreach ($queries as $query): ?>
+                    <tr>
+                        <td><?= $block->formatSql($query['sql']) ?></td>
+                        <td><?= $block->roundNumber($query['time'], 4) ?></td>
+                        <td><?= $query['nb'] ?></td>
+                    </tr>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
 
-    <div id="dtt_tab_multiple_queries" class="dtt-tab-container dtt-database-multiple-queries">
-        <table class="dtt-table">
-            <thead>
-            <tr>
-                <th>Sql</th>
-                <th>Total Time (sec)</th>
-                <th>Call Number</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($multipleQueries as $multipleQuery): ?>
+        <div id="dtt_tab_multiple_queries" class="dtt-tab-container dtt-database-multiple-queries">
+            <table class="dtt-table">
+                <thead>
                 <tr>
-                    <td><?= $block->formatSql($multipleQuery['sql']) ?></td>
-                    <td><?= $block->roundNumber($multipleQuery['time'], 4) ?></td>
-                    <td><?= $multipleQuery['nb'] ?></td>
+                    <th>Sql</th>
+                    <th>Total Time (sec)</th>
+                    <th>Call Number</th>
                 </tr>
-            <?php endforeach ?>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                <?php foreach ($multipleQueries as $multipleQuery): ?>
+                    <tr>
+                        <td><?= $block->formatSql($multipleQuery['sql']) ?></td>
+                        <td><?= $block->roundNumber($multipleQuery['time'], 4) ?></td>
+                        <td><?= $multipleQuery['nb'] ?></td>
+                    </tr>
+                <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    <?php endif ?>
 </div>

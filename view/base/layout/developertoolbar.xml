@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <layout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/layout_generic.xsd">
     <container name="root">
+        <block class="Magento\Framework\View\Element\Template" name="developertoolbar.styles" template="Sga_DeveloperToolbar::styles.phtml" />
         <block class="Sga\DeveloperToolbar\Block\Toolbar" name="developertoolbar.toolbar" template="Sga_DeveloperToolbar::toolbar.phtml">
             <block class="Sga\DeveloperToolbar\Block\Toolbar\Request" name="developertoolbar.toolbar.request" template="Sga_DeveloperToolbar::toolbar/request.phtml" />
             <block class="Sga\DeveloperToolbar\Block\Toolbar\Layout" name="developertoolbar.toolbar.layout" template="Sga_DeveloperToolbar::toolbar/layout.phtml" />

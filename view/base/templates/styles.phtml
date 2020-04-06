@@ -1,0 +1,204 @@
+<style>
+    /* generic */
+    #dt_container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        background: #3A3A3A;
+        z-index: 1000;
+        display: flex;
+        border-top: 1px solid #CCCCCC;
+    }
+    #dt_container ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+    #dt_container ul li {
+        padding:5px 0 0 0;
+    }
+    #dt_container .max {
+        color: #FF0000;
+    }
+    #dt_container .moy {
+        color: #ff7800;
+    }
+    #dt_container .min {
+        color: #deb700;
+    }
+    #dt_container .disabled {
+        text-decoration: line-through;
+    }
+
+    /* display */
+    #dt_container #dtd {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-right: 1px solid #1A1A1A;
+        padding: 5px;
+    }
+    #dt_container #dtd a {
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size:14px;
+        text-decoration: none;
+    }
+
+    /* toolbar */
+    #dt_container .dtt .dtti-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        list-style: none;
+        height: 100%;
+    }
+    #dt_container .dtt .dtti-container .dtti {
+        color: #FFFFFF;
+        font-weight: bold;
+        font-size: 14px;
+        border-right: 1px solid #1A1A1A;
+        padding: 5px 10px;
+    }
+    #dt_container .dtt .dtti-container .dtti.dtti-has-content {
+         cursor: pointer;
+    }
+    #dt_container .dtt .dtti-container .dtti:last-child{
+         border-right: none;
+    }
+    #dt_container .dtt .dtti-container .dtti.active {
+         border-bottom: 2px solid #0D7BBC;
+    }
+
+    #dt_container .dtt .dtti-container .dttic {
+        z-index: 1000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 40px;
+        margin: 0;
+        background: #EEEEEE;
+    }
+    #dt_container .dtt .dtti-container .dttic .dttic-head .close {
+        float:right;
+        margin: 0 10px 0 0;
+    }
+    #dt_container .dtt .dtti-container .dttic .dttic-content {
+        position: absolute;
+        top: 40px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: auto;
+    }
+    #dt_container .dtt .dtti-container .dttic .dttic-content .scroll {
+        display: block;
+        height: 100%;
+        overflow: scroll;
+        padding: 0 10px;
+    }
+
+    /* table */
+    #dt_container .dtt .dtt-table {
+        border-spacing: 0;
+        width: 100%;
+        border: 1px solid #999999;
+        background: #FFFFFF;
+    }
+    #dt_container .dtt .dtt-table thead th {
+        background:#000000;
+        color:#FFFFFF;
+        font-weight:bold;
+        padding:5px;
+        white-space: nowrap;
+    }
+    #dt_container .dtt .dtt-table tr th {
+        font-weight:bold;
+        width:200px;
+        padding:5px;
+    }
+    #dt_container .dtt .dtt-table tr:hover {
+        background: #AAAAAA;
+    }
+    #dt_container .dtt .dtt-table tr td {
+        padding:5px;
+    }
+
+    /* panel */
+    #dt_container .dtt .dtt-panel {
+        margin-bottom: 40px;
+    }
+    #dt_container .dtt .dtt-panel .title {
+        font-weight:bold;
+        margin-bottom:20px;
+    }
+
+    /* tabs */
+    #dt_container .dtt .dtt-tabs > ul {
+        padding: 0 20px;
+        border-bottom: 1px solid #000000;
+    }
+    #dt_container .dtt .dtt-tabs > ul .dtt-tab {
+        display: inline-block;
+        border-top: 1px solid #000000;
+        border-left: 1px solid #000000;
+        border-right: 1px solid #000000;
+        padding: 10px;
+    }
+    #dt_container .dtt .dtt-tabs > ul .dtt-tab.active {
+        background: #cccccc;
+    }
+
+    /* tree */
+    #dt_container .dtt .dtt-tree ul {
+        margin-left: 30px;
+        display: none;
+    }
+    #dt_container .dtt .dtt-tree ul li.has-children > .name {
+        font-weight:bold;
+    }
+    #dt_container .dtt .dtt-tree .tree-root {
+        display:block;
+    }
+    #dt_container .dtt .dtt-tree .icon {
+        margin-right: 5px;
+    }
+    #dt_container .dtt .dtt-tree .detail {
+        padding: 0 5px;
+        margin-left: 15px;
+        border: 1px solid #999999;
+        background: #FFFFFF;
+    }
+
+    /* events */
+    #dt_container .dtt .dtt-events td.event {
+        font-weight:bold;
+    }
+    #dt_container .dtt .dtt-events td.observer {
+        padding-left:30px;
+    }
+
+    /* collections */
+    #dt_container .dtt .dtt-collections td .class {
+        font-weight:bold;
+    }
+    #dt_container .dtt .dtt-collections td .query {
+        padding-left:30px;
+    }
+
+    /* plugins */
+    #dt_container .dtt .dtt-plugins .type {
+        font-weight:bold;
+    }
+    #dt_container .dtt .dtt-plugins .method {
+        padding-left:30px;
+    }
+    #dt_container .dtt .dtt-plugins .prefix {
+        padding-left:60px;
+    }
+    #dt_container .dtt .dtt-plugins .plugin {
+        padding-left:90px;
+    }
+</style>

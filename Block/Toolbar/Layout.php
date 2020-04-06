@@ -108,7 +108,8 @@ class Layout extends AbstractBlock
     public function getHtmlTreeBlocks($tree = [], $level = 0)
     {
         if (empty($tree)) {
-            $tree = [$this->_getTreeBlocks()];
+            $t = $this->_getTreeBlocks();
+            $tree = count($t) > 0 ? [$t] : [];
         }
 
         $html = '<ul class="'.($level === 0 ? 'tree-root' : '').'">';

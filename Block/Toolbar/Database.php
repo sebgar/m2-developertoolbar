@@ -77,6 +77,7 @@ class Database extends AbstractBlock
     public function getMultipleQueries()
     {
         if (!isset($this->_multiples)) {
+            $this->_multiples = [];
             $this->getQueries();
         }
         return $this->_multiples;

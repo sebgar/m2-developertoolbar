@@ -2,19 +2,18 @@
 namespace Sga\DeveloperToolbar\Helper;
 
 use Magento\Framework\App\Helper\AbstractHelper;
-use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\Helper\Context;
 use Magento\Framework\View\LayoutInterface;
 
 class Register extends AbstractHelper
 {
     protected $_layout;
-    protected $_events;
-    protected $_observers;
-    protected $_collections;
-    protected $_models;
-    protected $_blocks;
-    protected $_blocksRender;
+    protected $_events = [];
+    protected $_observers = [];
+    protected $_collections = [];
+    protected $_models = [];
+    protected $_blocks = [];
+    protected $_blocksRender = [];
 
     protected $_timeEndProfiler;
 
@@ -23,6 +22,7 @@ class Register extends AbstractHelper
         LayoutInterface $layout
     ) {
         $this->_layout = $layout;
+
         parent::__construct($context);
     }
 
