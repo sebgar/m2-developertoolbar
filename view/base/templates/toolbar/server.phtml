@@ -1,0 +1,12 @@
+<?php
+/* @var $block \Sga\DeveloperToolbar\Block\Toolbar\Server */
+?>
+<div class="dtt-tabs">
+    <ul>
+        <li class="dtt-tab" data-tab="#dtt_tab_phpinfo">PhpInfo</li>
+    </ul>
+
+    <div id="dtt_tab_phpinfo" class="dtt-tab-container dtt-phpinfo">
+        <div class="phpinfodisplay"><?= $block->getHtmlPhpInfo() ?></div>
+    </div>
+</div>

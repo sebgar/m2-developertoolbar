@@ -10,9 +10,14 @@ $blocksNotUsed = $block->getBlocksNotUsed();
         <li class="dtt-tab" data-tab="#dtt_tab_blocks">Blocks (<?= count($blocks) ?>)</li>
         <li class="dtt-tab" data-tab="#dtt_tab_blocks_not_used">Blocks Not Used (<?= count($blocksNotUsed) ?>)</li>
         <li class="dtt-tab" data-tab="#dtt_tab_handles">Handles (<?= count($handles) ?>)</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_updates_xml">Updates XML</li>
     </ul>
 
     <div id="dtt_tab_treeblocks" class="dtt-tab-container dtt-blocks dtt-tree">
+        <ul class="actions">
+            <li><a href="#" class="open-tree">Open tree</a></li>
+            <li><a href="#" class="close-tree">Close tree</a></li>
+        </ul>
         <?= $block->getHtmlTreeBlocks() ?>
     </div>
 
@@ -69,8 +74,34 @@ $blocksNotUsed = $block->getBlocksNotUsed();
     <div id="dtt_tab_handles" class="dtt-tab-container dtt-handles">
         <ul>
             <?php foreach ($handles as $handle): ?>
-                <li><?= $handle ?></li>
+                <?php $handleFiles = $block->getHandleInformations($handle) ?>
+                <li>
+                    <span class="handle open-children"><?= $handle ?></span>
+                    <?php if (count($handleFiles) > 0) : ?>
+                    <ul class="children" style="display:none">
+                        <?php foreach ($handleFiles as $handleFile): ?>
+                        <li>
+                            <span class="file open-children"><?= $handleFile['file']->getModule().' | '.$handleFile['file']->getName() ?></span>
+                            <table class="dtt-table children" style="display:none">
+                                <tr>
+                                    <td>Filename</td>
+                                    <td><?= $handleFile['file']->getFilename() ?></td>
+                                </tr>
+                                <tr>
+                                    <td>Xml</td>
+                                    <td class="xml"><?= $block->getHelperData()->formatNodeXmlToHtml($handleFile['xml']) ?></td>
+                                </tr>
+                            </table>
+                        </li>
+                        <?php endforeach ?>
+                    </ul>
+                    <?php endif ?>
+                </li>
             <?php endforeach ?>
         </ul>
+    </div>
+
+    <div id="dtt_tab_updates_xml" class="dtt-tab-container dtt-updates-xml xml">
+        <?= $block->getHelperData()->formatNodeXmlToHtml($block->getUpdatesXml()) ?>
     </div>
 </div>

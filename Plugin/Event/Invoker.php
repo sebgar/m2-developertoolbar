@@ -1,51 +1,33 @@
 <?php
 namespace Sga\DeveloperToolbar\Plugin\Event;
 
-use Magento\Framework\App\State as AppState;
+use Magento\Framework\Event\InvokerInterface as Subject;
 use Sga\DeveloperToolbar\Helper\Register;
-use Sga\DeveloperToolbar\Helper\Config;
+use Sga\DeveloperToolbar\Helper\Data as HelperData;
 
 class Invoker
 {
     protected $_helperRegister;
-    protected $_helperConfig;
-    protected $_appState;
+    protected $_helperData;
 
     public function __construct(
         Register $helperRegister,
-        Config $helperConfig,
-        AppState $appState
+        HelperData $helperData
     ) {
         $this->_helperRegister = $helperRegister;
-        $this->_helperConfig = $helperConfig;
-        $this->_appState = $appState;
+        $this->_helperData = $helperData;
     }
 
-    protected function _canCatch()
+    public function beforeDispatch(Subject $subject, $observerConfig, $wrapper)
     {
-        // is not enable in bo
-        if ($this->_appState->getAreaCode() === 'adminhtml' && !$this->_helperConfig->isEnabledBo()) {
-            return false;
-        }
-
-        // is not enable in fo
-        if ($this->_appState->getAreaCode() === 'frontend' && !$this->_helperConfig->isEnabledFo()) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function beforeDispatch($class, $observerConfig, $wrapper)
-    {
-        if ($this->_canCatch()) {
+        if ($this->_helperData->isEnable()) {
             $this->_helperRegister->addObserver($observerConfig, $wrapper, true);
         }
     }
 
-    public function afterDispatch($class, $result, $observerConfig, $wrapper)
+    public function afterDispatch(Subject $subject, $result, $observerConfig, $wrapper)
     {
-        if ($this->_canCatch()) {
+        if ($this->_helperData->isEnable()) {
             $this->_helperRegister->addObserver($observerConfig, $wrapper, false);
         }
     }

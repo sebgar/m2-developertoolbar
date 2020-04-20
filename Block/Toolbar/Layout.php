@@ -2,13 +2,37 @@
 
 namespace Sga\DeveloperToolbar\Block\Toolbar;
 
+use Magento\Framework\App\ProductMetadataInterface;
+use Magento\Framework\App\ResourceConnection;
+use Magento\Framework\Filesystem\DirectoryList;
+use Magento\Framework\View\Element\Template\Context;
 use Sga\DeveloperToolbar\Block\Toolbar\AbstractBlock;
+use Sga\DeveloperToolbar\Helper\Data as HelperData;
+use Sga\DeveloperToolbar\Helper\Register;
+use Sga\DeveloperToolbar\Model\Layout\Merge as LayoutMerge;
 
 class Layout extends AbstractBlock
 {
+    protected $_layoutMerge;
+
     protected $_blocks;
     protected $_treeBlocks;
-    protected $_blocksFoundInTree;
+    protected $_blocksFoundInTree = [];
+    protected $_handlesInformations;
+
+    public function __construct(
+        Context $context,
+        Register $helperRegister,
+        HelperData $helperData,
+        ProductMetadataInterface $productMetaData,
+        ResourceConnection $resource,
+        DirectoryList $directory,
+        LayoutMerge $layoutMerge
+    ) {
+        $this->_layoutMerge = $layoutMerge;
+
+        parent::__construct($context, $helperRegister, $helperData, $productMetaData, $resource, $directory);
+    }
 
     public function getCode()
     {
@@ -30,6 +54,24 @@ class Layout extends AbstractBlock
     public function getHandles()
     {
         return $this->_helperRegister->getLayout()->getUpdate()->getHandles();
+    }
+
+    public function getHandleInformations($handle)
+    {
+        if (!isset($this->_handlesInformations)) {
+            $this->_handlesInformations = $this->_layoutMerge->getHandlesInformations();
+        }
+
+        return isset($this->_handlesInformations[$handle]) ? $this->_handlesInformations[$handle] : [];
+    }
+
+    public function getUpdatesXml()
+    {
+        $xmlString = $this->_helperRegister->getLayout()->getUpdate()->asString();
+        $useErrors = libxml_use_internal_errors(true);
+        $xml = simplexml_load_string('<layouts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' . $xmlString . '</layouts>', \Magento\Framework\View\Layout\Element::class);
+        libxml_use_internal_errors($useErrors);
+        return $xml;
     }
 
     public function getBlocks()

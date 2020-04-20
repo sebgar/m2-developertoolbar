@@ -1,51 +1,33 @@
 <?php
 namespace Sga\DeveloperToolbar\Plugin\Event;
 
-use Magento\Framework\App\State as AppState;
+use Magento\Framework\Event\ManagerInterface as Subject;
 use Sga\DeveloperToolbar\Helper\Register;
-use Sga\DeveloperToolbar\Helper\Config;
+use Sga\DeveloperToolbar\Helper\Data as HelperData;
 
 class Manager
 {
     protected $_helperRegister;
-    protected $_helperConfig;
-    protected $_appState;
+    protected $_helperData;
 
     public function __construct(
         Register $helperRegister,
-        Config $helperConfig,
-        AppState $appState
+        HelperData $helperData
     ) {
         $this->_helperRegister = $helperRegister;
-        $this->_helperConfig = $helperConfig;
-        $this->_appState = $appState;
+        $this->_helperData = $helperData;
     }
 
-    protected function _canCatch()
+    public function beforeDispatch(Subject $subject, $eventName, $data=[])
     {
-        // is not enable in bo
-        if ($this->_appState->getAreaCode() === 'adminhtml' && !$this->_helperConfig->isEnabledBo()) {
-            return false;
-        }
-
-        // is not enable in fo
-        if ($this->_appState->getAreaCode() === 'frontend' && !$this->_helperConfig->isEnabledFo()) {
-            return false;
-        }
-
-        return true;
-    }
-
-    public function beforeDispatch($interceptor, $eventName, $data=[])
-    {
-        if ($this->_canCatch()) {
+        if ($this->_helperData->isEnable()) {
             $this->_helperRegister->addEvent($eventName, $data, true);
         }
     }
 
-    public function afterDispatch($interceptor, $result, $eventName, $data=[])
+    public function afterDispatch(Subject $subject, $result, $eventName, $data=[])
     {
-        if ($this->_canCatch()) {
+        if ($this->_helperData->isEnable()) {
             $this->_helperRegister->addEvent($eventName, $data, false);
         }
     }

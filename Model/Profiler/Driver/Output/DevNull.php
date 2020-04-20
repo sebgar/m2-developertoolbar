@@ -8,6 +8,6 @@ class DevNull implements OutputInterface
 {
     public function display(Stat $stat)
     {
-        //echo '';
+        echo '';
     }
 }

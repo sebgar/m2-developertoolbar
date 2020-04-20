@@ -9,6 +9,7 @@
             <block class="Sga\DeveloperToolbar\Block\Toolbar\Models" name="developertoolbar.toolbar.models" template="Sga_DeveloperToolbar::toolbar/models.phtml" />
             <block class="Sga\DeveloperToolbar\Block\Toolbar\Plugins" name="developertoolbar.toolbar.plugins" template="Sga_DeveloperToolbar::toolbar/plugins.phtml" />
             <block class="Sga\DeveloperToolbar\Block\Toolbar\Database" name="developertoolbar.toolbar.database" template="Sga_DeveloperToolbar::toolbar/database.phtml" />
+            <block class="Sga\DeveloperToolbar\Block\Toolbar\Server" name="developertoolbar.toolbar.server" template="Sga_DeveloperToolbar::toolbar/server.phtml" />
             <block class="Sga\DeveloperToolbar\Block\Toolbar\Profiler" name="developertoolbar.toolbar.profiler" template="Sga_DeveloperToolbar::toolbar/profiler.phtml" />
             <block class="Sga\DeveloperToolbar\Block\Toolbar\Memory" name="developertoolbar.toolbar.memory" />
             <block class="Sga\DeveloperToolbar\Block\Toolbar\Time" name="developertoolbar.toolbar.time" />

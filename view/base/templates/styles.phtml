@@ -152,24 +152,55 @@
     }
 
     /* tree */
-    #dt_container .dtt .dtt-tree ul {
+    #dt_container .dtt .dtt-tree .actions {
+        padding: 10px 0;
+    }
+    #dt_container .dtt .dtt-tree .actions li {
+        display: inline-block;
+        margin: 0 10px 0 0;
+        padding: 0 10px 0 0;
+        border-right: 1px solid #000;
+    }
+    #dt_container .dtt .dtt-tree .actions li:last-child {
+        border-right: none;
+    }
+    #dt_container .dtt .tree-root ul {
         margin-left: 30px;
         display: none;
     }
-    #dt_container .dtt .dtt-tree ul li.has-children > .name {
+    #dt_container .dtt .tree-root ul li.has-children > .name {
         font-weight:bold;
     }
-    #dt_container .dtt .dtt-tree .tree-root {
-        display:block;
-    }
-    #dt_container .dtt .dtt-tree .icon {
+    #dt_container .dtt .tree-root .icon {
         margin-right: 5px;
     }
-    #dt_container .dtt .dtt-tree .detail {
+    #dt_container .dtt .tree-root .detail {
         padding: 0 5px;
         margin-left: 15px;
         border: 1px solid #999999;
         background: #FFFFFF;
+    }
+
+    /* handles */
+    #dt_container .dtt .dtt-handles .handle {
+        font-weight:bold;
+    }
+    #dt_container .dtt .dtt-handles .children {
+        padding-left:30px;
+    }
+    #dt_container .dtt .dtt-handles .file {
+        text-decoration: underline;
+    }
+
+    /* xml */
+    #dt_container .dtt .xml .pad {
+        padding-left:30px;
+    }
+    #dt_container .dtt .xml .move {
+        color:#0000FF;
+    }
+    #dt_container .dtt .xml .remove {
+        color:#FF0000;
     }
 
     /* events */

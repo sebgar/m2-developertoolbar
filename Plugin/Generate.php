@@ -1,32 +1,28 @@
 <?php
 namespace Sga\DeveloperToolbar\Plugin;
 
-use Magento\Framework\App\Response\Http;
+use Magento\Framework\App\Response\Http as Subject;
 use Magento\Framework\ObjectManagerInterface;
-use Magento\Framework\App\State as AppState;
 use Sga\DeveloperToolbar\Helper\Register;
-use Sga\DeveloperToolbar\Helper\Config;
+use Sga\DeveloperToolbar\Helper\Data as HelperData;
 
 class Generate
 {
     protected $_objectManager;
     protected $_helperRegister;
-    protected $_helperConfig;
-    protected $_appState;
+    protected $_helperData;
 
     public function __construct(
         ObjectManagerInterface $objectManager,
         Register $helperRegister,
-        Config $helperConfig,
-        AppState $appState
+        HelperData $helperData
     ){
         $this->_objectManager = $objectManager;
         $this->_helperRegister = $helperRegister;
-        $this->_helperConfig = $helperConfig;
-        $this->_appState = $appState;
+        $this->_helperData = $helperData;
     }
 
-    public function afterSendResponse(Http $subject)
+    public function afterSendResponse(Subject $subject)
     {
         $this->_helperRegister->stopProfilerTime();
 
@@ -43,13 +39,7 @@ class Generate
 
     protected function _canDisplay()
     {
-        // is not enable in bo
-        if ($this->_appState->getAreaCode() === 'adminhtml' && !$this->_helperConfig->isEnabledBo()) {
-            return false;
-        }
-
-        // is not enable in fo
-        if ($this->_appState->getAreaCode() === 'frontend' && !$this->_helperConfig->isEnabledFo()) {
+        if (!$this->_helperData->isEnable()) {
             return false;
         }
 

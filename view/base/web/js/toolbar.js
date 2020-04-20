@@ -105,6 +105,19 @@ define([
                 var element = $(event.currentTarget);
                 element.siblings('.children').toggle();
             });
+
+            // open tree
+            $('.open-tree').on('click', function(event){
+                var element = $(event.currentTarget);
+                element.parents('.dtt-tree').find('.tree-root ul').show();
+            });
+
+            // close tree
+            $('.close-tree').on('click', function(event){
+                var element = $(event.currentTarget);
+                element.parents('.dtt-tree').find('.tree-root ul').hide();
+            });
+
         },
 
         saveCookie: function (cookieName, cookieValue)

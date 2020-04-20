@@ -7,11 +7,13 @@ use Magento\Framework\Filesystem\DirectoryList;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Sga\DeveloperToolbar\Helper\Register;
+use Sga\DeveloperToolbar\Helper\Data as HelperData;
 
 abstract class AbstractBlock extends Template
 {
     protected $_profiler;
     protected $_helperRegister;
+    protected $_helperData;
     protected $_productMetaData;
     protected $_resource;
     protected $_directory;
@@ -21,12 +23,14 @@ abstract class AbstractBlock extends Template
     public function __construct(
         Context $context,
         Register $helperRegister,
+        HelperData $helperData,
         ProductMetadataInterface $productMetaData,
         ResourceConnection $resource,
         DirectoryList $directory
     ) {
         $this->_profiler = $_SERVER['SGA_PROFILER'];
         $this->_helperRegister = $helperRegister;
+        $this->_helperData = $helperData;
         $this->_productMetaData = $productMetaData;
         $this->_resource = $resource;
         $this->_directory = $directory;
@@ -43,6 +47,11 @@ abstract class AbstractBlock extends Template
     public function getHelperRegister()
     {
         return $this->_helperRegister;
+    }
+
+    public function getHelperData()
+    {
+        return $this->_helperData;
     }
 
     public function getAppState()
