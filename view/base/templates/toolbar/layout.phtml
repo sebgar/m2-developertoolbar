@@ -81,7 +81,7 @@ $blocksNotUsed = $block->getBlocksNotUsed();
                     <ul class="children" style="display:none">
                         <?php foreach ($handleFiles as $handleFile): ?>
                         <li>
-                            <span class="file open-children"><?= $handleFile['file']->getModule().' | '.$handleFile['file']->getName() ?></span>
+                            <span class="file open-children"><?= $block->getHandleFileFrom($handleFile['file']->getFilename()).' | '.$handleFile['file']->getModule().' | '.$handleFile['file']->getName() ?></span>
                             <table class="dtt-table children" style="display:none">
                                 <tr>
                                     <td>Filename</td>

@@ -53,7 +53,14 @@ class Layout extends AbstractBlock
 
     public function getHandles()
     {
-        return $this->_helperRegister->getLayout()->getUpdate()->getHandles();
+        $handles = $this->_helperRegister->getLayout()->getUpdate()->getHandles();
+
+        $xml = $this->getUpdatesXml();
+        foreach ($xml->xpath('//update/@handle') as $handle) {
+            $handles[] = (string)$handle;
+        }
+
+        return $handles;
     }
 
     public function getHandleInformations($handle)
@@ -63,6 +70,18 @@ class Layout extends AbstractBlock
         }
 
         return isset($this->_handlesInformations[$handle]) ? $this->_handlesInformations[$handle] : [];
+    }
+
+    public function getHandleFileFrom($file)
+    {
+        $file = str_replace($this->_directory->getRoot(), '', $file);
+        if (preg_match('#^/vendor/#', $file)) {
+            return 'Vendor';
+        } elseif (preg_match('#^/app/code/#', $file)) {
+            return 'Module';
+        } elseif (preg_match('#^/app/design/#', $file)) {
+            return 'Theme';
+        }
     }
 
     public function getUpdatesXml()
