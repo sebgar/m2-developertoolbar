@@ -182,7 +182,8 @@ class Layout extends AbstractBlock
                 $html .= '<i class="icon">+</i>';
             }
             $timeRender = $this->_getTimeRender($treeNode);
-            $html .= '<span class="name '.$this->getColorCss($timeRender).'">' . $treeNode['name'] . ' (' . $timeRender . ' sec)</span>';
+            $alias = $treeNode['alias'] !== '' && $treeNode['alias'] !== $treeNode['name'] ? ' (alias : '.$treeNode['alias'].')' : '';
+            $html .= '<span class="name '.$this->getColorCss($timeRender).'">' . $treeNode['name'] . $alias . ' (' . $timeRender . ' sec)</span>';
 
             $infos = [];
             if (isset($treeNode['class_name']) && $treeNode['class_name'] != '') {

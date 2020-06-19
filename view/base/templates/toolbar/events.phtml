@@ -24,7 +24,7 @@ $observersTime = [];
                     <?php $observers[$event['event'].'::'.$observer['name']] = $observer ?>
                     <?php $observersTime[$event['event'].'::'.$observer['name']] = $observer['time'] ?>
                     <tr class="<?= $observer['disabled'] ? 'disabled' : '' ?>">
-                        <td class="observer<?= $block->getColorCss($observer['time']) ?>"><?= $observer['name'] ?> (<?= $observer['instance'] ?>)</td>
+                        <td class="observer<?= $block->getColorCss($observer['time']) ?>"><?= $observer['name'] ?> (<?= isset($observer['instance']) ? $observer['instance'] : '-' ?>)</td>
                         <td><?= isset($observer['time']) ? $block->roundNumber($observer['time']) : '-' ?></td>
                         <td><?= $observer['call_number'] ?></td>
                     </tr>
@@ -55,7 +55,7 @@ $observersTime = [];
             <?php foreach ($observersTime as $name => $time): ?>
                 <?php $observer = $observers[$name] ?>
                 <tr class="<?= $observer['disabled'] ? 'disabled' : '' ?>">
-                    <td class="observer<?= $block->getColorCss($observer['time']) ?>"><?= $name ?> (<?= $observer['instance'] ?>)</td>
+                    <td class="observer<?= $block->getColorCss($observer['time']) ?>"><?= $name ?> (<?= isset($observer['instance']) ? $observer['instance'] : '-' ?>)</td>
                     <td><?= isset($observer['time']) ? $block->roundNumber($observer['time']) : '-' ?></td>
                     <td><?= $observer['call_number'] ?></td>
                 </tr>
