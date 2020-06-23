@@ -57,7 +57,7 @@ class Plugins extends AbstractBlock
                                     $prefix = $types[$keyType];
                                     $this->_types[$type][$method][$prefix][$sortOrder][] = [
                                         'plugin' => $inherited[$type][$pluginName]['instance'],
-                                        'plugAmasty\GeoipRedirect\Plugin\Actionin_name' => $pluginName,
+                                        'plugin_name' => $pluginName,
                                     ];
                                 }
                             }
