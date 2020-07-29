@@ -5,11 +5,13 @@ namespace Sga\DeveloperToolbar\Block\Toolbar;
 use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Filesystem\DirectoryList;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\View\Element\Template\Context;
 use Sga\DeveloperToolbar\Block\Toolbar\AbstractBlock;
 use Sga\DeveloperToolbar\Helper\Data as HelperData;
 use Sga\DeveloperToolbar\Helper\Register;
 use Sga\DeveloperToolbar\Model\Layout\Merge as LayoutMerge;
+use Sga\DeveloperToolbar\Model\Session;
 
 class Layout extends AbstractBlock
 {
@@ -22,16 +24,19 @@ class Layout extends AbstractBlock
 
     public function __construct(
         Context $context,
+        Json $jsonSerializer,
+        Session $session,
         Register $helperRegister,
         HelperData $helperData,
         ProductMetadataInterface $productMetaData,
         ResourceConnection $resource,
         DirectoryList $directory,
-        LayoutMerge $layoutMerge
+        LayoutMerge $layoutMerge,
+        array $data = []
     ) {
         $this->_layoutMerge = $layoutMerge;
 
-        parent::__construct($context, $helperRegister, $helperData, $productMetaData, $resource, $directory);
+        parent::__construct($context, $jsonSerializer, $session, $helperRegister, $helperData, $productMetaData, $resource, $directory, $data);
     }
 
     public function getCode()

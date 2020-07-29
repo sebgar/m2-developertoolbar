@@ -6,14 +6,14 @@ $blocksNotUsed = $block->getBlocksNotUsed();
 ?>
 <div class="dtt-tabs">
     <ul>
-        <li class="dtt-tab" data-tab="#dtt_tab_treeblocks">Tree Blocks</li>
-        <li class="dtt-tab" data-tab="#dtt_tab_blocks">Blocks (<?= count($blocks) ?>)</li>
-        <li class="dtt-tab" data-tab="#dtt_tab_blocks_not_used">Blocks Not Used (<?= count($blocksNotUsed) ?>)</li>
-        <li class="dtt-tab" data-tab="#dtt_tab_handles">Handles (<?= count($handles) ?>)</li>
-        <li class="dtt-tab" data-tab="#dtt_tab_updates_xml">Updates XML</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_treeblocks<?= $block->getRequestKey() ?>">Tree Blocks</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_blocks<?= $block->getRequestKey() ?>">Blocks (<?= count($blocks) ?>)</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_blocks_not_used<?= $block->getRequestKey() ?>">Blocks Not Used (<?= count($blocksNotUsed) ?>)</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_handles<?= $block->getRequestKey() ?>">Handles (<?= count($handles) ?>)</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_updates_xml<?= $block->getRequestKey() ?>">Updates XML</li>
     </ul>
 
-    <div id="dtt_tab_treeblocks" class="dtt-tab-container dtt-blocks dtt-tree">
+    <div id="dtt_tab_treeblocks<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-blocks dtt-tree">
         <ul class="actions">
             <li><a href="#" class="open-tree">Open tree</a></li>
             <li><a href="#" class="close-tree">Close tree</a></li>
@@ -21,7 +21,7 @@ $blocksNotUsed = $block->getBlocksNotUsed();
         <?= $block->getHtmlTreeBlocks() ?>
     </div>
 
-    <div id="dtt_tab_blocks" class="dtt-tab-container dtt-blocks">
+    <div id="dtt_tab_blocks<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-blocks">
         <table class="dtt-table">
             <thead>
             <tr>
@@ -48,7 +48,7 @@ $blocksNotUsed = $block->getBlocksNotUsed();
         </table>
     </div>
 
-    <div id="dtt_tab_blocks_not_used" class="dtt-tab-container dtt-blocks">
+    <div id="dtt_tab_blocks_not_used<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-blocks">
         <table class="dtt-table">
             <thead>
             <tr>
@@ -71,7 +71,7 @@ $blocksNotUsed = $block->getBlocksNotUsed();
         </table>
     </div>
 
-    <div id="dtt_tab_handles" class="dtt-tab-container dtt-handles">
+    <div id="dtt_tab_handles<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-handles">
         <ul>
             <?php foreach ($handles as $handle): ?>
                 <?php $handleFiles = $block->getHandleInformations($handle) ?>
@@ -101,7 +101,7 @@ $blocksNotUsed = $block->getBlocksNotUsed();
         </ul>
     </div>
 
-    <div id="dtt_tab_updates_xml" class="dtt-tab-container dtt-updates-xml xml">
+    <div id="dtt_tab_updates_xml<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-updates-xml xml">
         <?= $block->getHelperData()->formatNodeXmlToHtml($block->getUpdatesXml()) ?>
     </div>
 </div>

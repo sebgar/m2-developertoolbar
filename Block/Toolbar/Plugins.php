@@ -19,6 +19,11 @@ class Plugins extends AbstractBlock
         return 'Plugins';
     }
 
+    public function canDisplay()
+    {
+        return $this->_session->getCanAddOtherRequest();
+    }
+
     public function getPlugins()
     {
         if (is_null($this->_types)) {

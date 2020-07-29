@@ -1,0 +1,19 @@
+<?php
+/* @var $block \Sga\DeveloperToolbar\Block\Display */
+$isShow = $block->isShow();
+
+$config = [
+    'elements' => [
+        'show' => '#dtd_show',
+        'hide' => '#dtd_hide',
+        'toolbars' => '.dtt'
+    ],
+];
+?>
+<div id="dtd">
+    <a href="javascript:void(0)" id="dtd_show" style="<?= !$isShow ? '' : 'display:none' ?>">&gt;&gt;</a>
+    <a href="javascript:void(0)" id="dtd_hide" style="<?= $isShow ? '' : 'display:none' ?>">&lt;&lt;</a>
+</div>
+<script type="text/x-magento-init">
+{"#dtd": {"Sga_DeveloperToolbar/js/display": <?= $block->getJsonSerializer()->serialize($config) ?>}}
+</script>

@@ -4,19 +4,24 @@ namespace Sga\DeveloperToolbar\Block;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\View\Element\Template\Context;
 use Magento\Framework\Serialize\Serializer\Json;
+use Sga\DeveloperToolbar\Model\Session;
 
 class Toolbar extends Template
 {
     protected $_jsonSerializer;
+    protected $_session;
 
     public function __construct(
         Context $context,
         Json $jsonSerializer,
+        Session $session,
         array $data = []
     ) {
         $this->_jsonSerializer = $jsonSerializer;
 
         parent::__construct($context, $data);
+
+        $this->_session = $session;
     }
 
     public function getJsonSerializer()
@@ -36,7 +41,7 @@ class Toolbar extends Template
 
     public function getRequestKey()
     {
-        return '1';
+        return $this->_session->getRequestKey();
     }
 
     public function getChildren()
@@ -46,10 +51,26 @@ class Toolbar extends Template
 
     public function isShow()
     {
-        if (!isset($_COOKIE['xdt_display']) || ($_COOKIE['xdt_display'] == 'show')) {
-            return true;
+        return $this->_session->getCanAddOtherRequest();
+    }
+
+    public function getHtmlOtherRequests()
+    {
+        $html = '';
+
+        if ($this->_session->getCanAddOtherRequest()) {
+            // display all the request in session
+            $requests = $this->_session->getHtmlRequests();
+            if (is_array($requests)) {
+                foreach ($requests as $request) {
+                    $html .= $request;
+                }
+            }
+
+            // clean session
+            $this->_session->cleanHtmlRequests();
         }
 
-        return false;
+        return $html;
     }
 }

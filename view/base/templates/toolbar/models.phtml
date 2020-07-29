@@ -5,11 +5,11 @@ $collections = $block->getCollections();
 ?>
 <div class="dtt-tabs">
     <ul>
-        <li class="dtt-tab" data-tab="#dtt_tab_models">Models (<?= count($models) ?>)</li>
-        <li class="dtt-tab" data-tab="#dtt_tab_collections">Collections (<?= count($collections) ?>)</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_models<?= $block->getRequestKey() ?>">Models (<?= count($models) ?>)</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_collections<?= $block->getRequestKey() ?>">Collections (<?= count($collections) ?>)</li>
     </ul>
 
-    <div id="dtt_tab_models" class="dtt-tab-container dtt-models">
+    <div id="dtt_tab_models<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-models">
         <table class="dtt-table">
             <thead>
             <tr>
@@ -28,7 +28,7 @@ $collections = $block->getCollections();
         </table>
     </div>
 
-    <div id="dtt_tab_collections" class="dtt-tab-container dtt-collections">
+    <div id="dtt_tab_collections<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-collections">
         <table class="dtt-table">
             <thead>
             <tr>

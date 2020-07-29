@@ -4,12 +4,14 @@ namespace Sga\DeveloperToolbar\Block\Toolbar;
 use Magento\Framework\App\ProductMetadataInterface;
 use Magento\Framework\App\ResourceConnection;
 use Magento\Framework\Filesystem\DirectoryList;
-use Magento\Framework\View\Element\Template;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\View\Element\Template\Context;
+use Sga\DeveloperToolbar\Block\Toolbar;
 use Sga\DeveloperToolbar\Helper\Register;
 use Sga\DeveloperToolbar\Helper\Data as HelperData;
+use Sga\DeveloperToolbar\Model\Session;
 
-abstract class AbstractBlock extends Template
+abstract class AbstractBlock extends Toolbar
 {
     protected $_profiler;
     protected $_helperRegister;
@@ -22,11 +24,14 @@ abstract class AbstractBlock extends Template
 
     public function __construct(
         Context $context,
+        Json $jsonSerializer,
+        Session $session,
         Register $helperRegister,
         HelperData $helperData,
         ProductMetadataInterface $productMetaData,
         ResourceConnection $resource,
-        DirectoryList $directory
+        DirectoryList $directory,
+        array $data = []
     ) {
         $this->_profiler = $_SERVER['SGA_PROFILER'];
         $this->_helperRegister = $helperRegister;
@@ -35,7 +40,8 @@ abstract class AbstractBlock extends Template
         $this->_resource = $resource;
         $this->_directory = $directory;
 
-        parent::__construct($context);
+        parent::__construct($context, $jsonSerializer, $session, $data);
+
         $this->_preload();
     }
 

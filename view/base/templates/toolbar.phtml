@@ -1,12 +1,12 @@
 <?php /* @var $block \Sga\DeveloperToolbar\Block\Toolbar */ ?>
 <?php
+$requestKey = $block->getRequestKey();
 $isShow = $block->isShow();
+
 $config = [
-    'request_key' => $block->getRequestKey(),
+    'requestKey' => $requestKey,
     'elements' => [
-        'showToolbar' => '#dtd_show',
-        'hideToolbar' => '#dtd_hide',
-        'toolbars' => '.dtt',
+        'toolbar_prefix' => '#dtt',
         'item' => '.dtti',
         'item_id' => '#dtti_',
         'item_content' => '.dttic',
@@ -18,19 +18,16 @@ $config = [
 $children = $block->getChildren();
 ?>
 <?php if (is_array($children) && count($children) > 0) : ?>
-<div id="dt_container">
-    <div id="dtd">
-        <a href="javascript:void(0)" id="dtd_show" style="<?= !$isShow ? '' : 'display:none' ?>">&gt;&gt;</a>
-        <a href="javascript:void(0)" id="dtd_hide" style="<?= $isShow ? '' : 'display:none' ?>">&lt;&lt;</a>
-    </div>
-    <div id="dtt<?= $block->getRequestKey() ?>" class="dtt">
+    <?= $block->getHtmlOtherRequests() ?>
+
+    <div id="dtt<?= $requestKey ?>" class="dtt" data-key="<?= $requestKey ?>" style="<?= $isShow ? '' : 'display:none' ?>">
         <dl class="dtti-container">
             <?php foreach ($children as $child): ?>
                 <?php if ($child->canDisplay()): ?>
-                    <dt class="dtti dtti-<?= $child->getCode() ?> <?= $child->hasContent() ? 'dtti-has-content' : '' ?>" id="dtti_<?= $child->getCode() ?><?= $block->getRequestKey() ?>" data-code="<?= $child->getCode() ?>"><?= $child->getLabel() ?></dt>
+                    <dt class="dtti dtti-<?= $child->getCode() ?> <?= $child->hasContent() ? 'dtti-has-content' : '' ?>" id="dtti_<?= $child->getCode() ?><?= $requestKey ?>" data-code="<?= $child->getCode() ?>"><?= $child->getLabel() ?></dt>
 
                     <?php if ($child->hasContent()): ?>
-                        <dd class="dttic" id="dttic_<?= $child->getCode().$block->getRequestKey() ?>" style="display:none;" data-code="<?= $child->getCode() ?>">
+                        <dd class="dttic" id="dttic_<?= $child->getCode().$requestKey ?>" style="display:none;" data-code="<?= $child->getCode() ?>">
                             <div class="dttic-head"><a href="javascript:void(0)" class="close"><?= __('Close')?></a></div>
                             <div class="dttic-content"><div class="scroll"><?= $child->toHtml() ?></div></div>
                         </dd>
@@ -40,8 +37,7 @@ $children = $block->getChildren();
         </dl>
 
         <script type="text/x-magento-init">
-        {"#dtt<?= $this->getRequestKey() ?>": {"Sga_DeveloperToolbar/js/toolbar": <?= $block->getJsonSerializer()->serialize($config) ?>}}
+        {"#dtt<?= $requestKey ?>": {"Sga_DeveloperToolbar/js/toolbar": <?= $block->getJsonSerializer()->serialize($config) ?>}}
         </script>
     </div>
-</div>
 <?php endif ?>

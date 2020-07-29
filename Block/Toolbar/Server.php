@@ -17,6 +17,11 @@ class Server extends AbstractBlock
         return 'Server';
     }
 
+    public function canDisplay()
+    {
+        return $this->_session->getCanAddOtherRequest();
+    }
+
     protected function phpInfoCssLambda($value)
     {
         return ".phpinfodisplay " . preg_replace( "/,/", ",.phpinfodisplay ", $value );

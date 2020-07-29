@@ -7,11 +7,11 @@ $observersTime = [];
 ?>
 <div class="dtt-tabs">
     <ul>
-        <li class="dtt-tab" data-tab="#dtt_tab_events">Events/Observers</li>
-        <li class="dtt-tab" data-tab="#dtt_tab_observers">Observers</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_events<?= $block->getRequestKey() ?>">Events/Observers</li>
+        <li class="dtt-tab" data-tab="#dtt_tab_observers<?= $block->getRequestKey() ?>">Observers</li>
     </ul>
 
-    <div id="dtt_tab_events" class="dtt-tab-container dtt-events">
+    <div id="dtt_tab_events<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-events">
         <table class="dtt-table">
             <tbody>
             <?php foreach ($events as $event): ?>
@@ -42,7 +42,7 @@ $observersTime = [];
     </div>
 
     <?php arsort($observersTime) ?>
-    <div id="dtt_tab_observers" class="dtt-tab-container dtt-observers">
+    <div id="dtt_tab_observers<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-observers">
         <table class="dtt-table">
             <thead>
             <tr>

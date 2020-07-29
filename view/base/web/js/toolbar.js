@@ -16,39 +16,25 @@ define([
 
         bindEvents: function()
         {
-            // show toolbar
-            $(this.options.elements.showToolbar).on('click', function(){
-                $(this.options.elements.showToolbar).hide();
-                $(this.options.elements.hideToolbar).show();
-                $(this.options.elements.toolbars).show();
-
-                this.saveCookie(this.options.cookiename, 'show');
-            }.bind(this));
-
-            // hide toolbar
-            $(this.options.elements.hideToolbar).on('click', function(){
-                $(this.options.elements.showToolbar).show();
-                $(this.options.elements.hideToolbar).hide();
-                $(this.options.elements.toolbars).hide();
-
-                this.saveCookie(this.options.cookiename, 'hide');
-            }.bind(this));
+            var toolbarPrefix = this.options.elements.toolbar_prefix+this.options.requestKey;
 
             // container close
-            $(this.options.elements.close).on('click', function(event){
+            $(toolbarPrefix+' '+this.options.elements.close).on('click', function(event){
                 var element = $(event.currentTarget);
+                var requestKey = element.closest('.dtt').data('key');
                 var content = $(element.parents(this.options.elements.item_content)[0]);
 
                 // hide content
                 content.hide();
 
                 // remove active on item
-                $(this.options.elements.item_id+content.data('code')+this.options.request_key).removeClass('active');
+                $(this.options.elements.item_id+content.data('code')+requestKey).removeClass('active');
             }.bind(this));
 
             // toolbar items
-            $(this.options.elements.item).on('click', function(event){
+            $(toolbarPrefix+' '+this.options.elements.item).on('click', function(event){
                 var element = $(event.currentTarget);
+                var requestKey = element.closest('.dtt').data('key');
 
                 if (element.hasClass('dtti-has-content')) {
                     var isOpen = element.hasClass('active');
@@ -62,13 +48,13 @@ define([
                     // hide content and activate the right content
                     $(this.options.elements.item_content).hide();
                     if (!isOpen) {
-                        $(this.options.elements.item_content_id+element.data('code')+this.options.request_key).show();
+                        $(this.options.elements.item_content_id+element.data('code')+requestKey).show();
                     }
                 }
             }.bind(this));
 
             // tabs
-            $('.dtt-tab').on('click', function (event) {
+            $(toolbarPrefix+' .dtt-tab').on('click', function (event) {
                 var element = $(event.currentTarget);
 
                 // enable / disable tab
@@ -79,12 +65,12 @@ define([
                 element.parents('.dtt-tabs').find('.dtt-tab-container').hide();
                 $(element.data('tab')).show();
             });
-            $('.dtt-tabs').each(function(index, element){
+            $(toolbarPrefix+' .dtt-tabs').each(function(index, element){
                 $(element).find('.dtt-tab').first().click();
             });
 
             // tree
-            $('.dtt-tree li > .icon').on('click', function(event){
+            $(toolbarPrefix+' .dtt-tree li > .icon').on('click', function(event){
                 var element = $(event.currentTarget);
                 var container = element.siblings('ul');
                 if (container.is(":visible")) {
@@ -95,34 +81,28 @@ define([
                     element.siblings('.icon').html('-');
                 }
             });
-            $('.dtt-tree li > .name').on('click', function(event){
+            $(toolbarPrefix+' .dtt-tree li > .name').on('click', function(event){
                 var element = $(event.currentTarget);
                 element.siblings('.detail').toggle();
             });
 
             // open children
-            $('.open-children').on('click', function(event){
+            $(toolbarPrefix+' .open-children').on('click', function(event){
                 var element = $(event.currentTarget);
                 element.siblings('.children').toggle();
             });
 
             // open tree
-            $('.open-tree').on('click', function(event){
+            $(toolbarPrefix+' .open-tree').on('click', function(event){
                 var element = $(event.currentTarget);
                 element.parents('.dtt-tree').find('.tree-root ul').show();
             });
 
             // close tree
-            $('.close-tree').on('click', function(event){
+            $(toolbarPrefix+' .close-tree').on('click', function(event){
                 var element = $(event.currentTarget);
                 element.parents('.dtt-tree').find('.tree-root ul').hide();
             });
-
-        },
-
-        saveCookie: function (cookieName, cookieValue)
-        {
-            //Cookie.write(cookieName, cookieValue, 30 * 24 * 60 * 60);
         }
     });
 

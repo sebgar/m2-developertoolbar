@@ -1,0 +1,27 @@
+<?php /* @var $block \Sga\DeveloperToolbar\Block\Chooser */ ?>
+<?php if($block->canDisplay()): ?>
+<?php
+    $config = [
+        'elements' => [
+            'requests_item' => '.requests .request',
+            'container_requests' => '.dtt',
+            'container_request' => '#dtt'
+        ],
+    ];
+
+    $html = $block->getHtmlRequests();
+    $actualKey = $block->getRequestKey();
+?>
+<div id="dt_chooser" style="<?= $block->isShow() ? '' : 'display:none' ?>">
+    <ul class="requests">
+        <?php $i = 0; foreach($html as $key => $h): ?>
+            <li class="request" data-key="<?= $key ?>"><?= __('#%1', $i+1) ?></li>
+        <?php $i++; endforeach ?>
+        <li class="request active" data-key="<?= $actualKey ?>"><?= __('#%1', $i+1) ?></li>
+    </ul>
+
+    <script type="text/x-magento-init">
+    {"#dt_chooser": {"Sga_DeveloperToolbar/js/chooser": <?= $block->getJsonSerializer()->serialize($config) ?>}}
+    </script>
+</div>
+<?php endif ?>

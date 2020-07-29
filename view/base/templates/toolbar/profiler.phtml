@@ -1,7 +1,14 @@
 <?php
 /* @var $block \Sga\DeveloperToolbar\Block\Toolbar\Profiler */
 ?>
-<div class="dtt-panel dtt-profiler dtt-tree">
-    <div class="title">Profiler</div>
-    <?= $block->getHtmlTreeProfiler() ?>
+<div class="dtt-tabs">
+    <ul>
+        <li class="dtt-tab" data-tab="#dtt_tab_profiler<?= $block->getRequestKey() ?>">Profiler</li>
+    </ul>
+
+    <div id="dtt_tab_profiler<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-profiler">
+        <div class="dtt-profiler dtt-tree">
+            <?= $block->getHtmlTreeProfiler() ?>
+        </div>
+    </div>
 </div>
