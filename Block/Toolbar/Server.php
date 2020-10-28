@@ -29,7 +29,7 @@ class Server extends AbstractBlock
 
     public function getHtmlPhpInfo()
     {
-        $profiler = $_SERVER['SGA_PROFILER'];
+        $profiler = isset($_SERVER['SGA_PROFILER']) ? $_SERVER['SGA_PROFILER'] : null;
         $_SERVER['SGA_PROFILER'] = null;
 
         ob_start();

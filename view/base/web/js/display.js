@@ -17,7 +17,12 @@ define([
             $(this.options.elements.show).on('click', function(){
                 $(this.options.elements.show).hide();
                 $(this.options.elements.hide).show();
-                $(this.options.elements.toolbars).show();
+                $(this.options.elements.chooser).show();
+                if ($(this.options.elements.toolbar_active).length > 0) {
+                    $(this.options.elements.toolbar_active).click();
+                } else {
+                    $(this.options.elements.toolbars).show();
+                }
 
                 this.saveCookie(this.options.cookiename, 'show');
             }.bind(this));
@@ -26,6 +31,7 @@ define([
             $(this.options.elements.hide).on('click', function(){
                 $(this.options.elements.show).show();
                 $(this.options.elements.hide).hide();
+                $(this.options.elements.chooser).hide();
                 $(this.options.elements.toolbars).hide();
 
                 this.saveCookie(this.options.cookiename, 'hide');

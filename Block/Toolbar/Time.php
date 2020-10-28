@@ -12,7 +12,11 @@ class Time extends AbstractBlock
 
     public function getLabel()
     {
-        return $this->roundNumber($this->_helperRegister->getTimeEndProfiler() - $this->_profiler->getStartTime()).' sec';
+        if (isset($this->_profiler)) {
+            return $this->roundNumber($this->_helperRegister->getTimeEndProfiler() - $this->_profiler->getStartTime()).' sec';
+        } else {
+            return '-';
+        }
     }
 
     public function hasContent()

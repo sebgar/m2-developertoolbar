@@ -66,20 +66,22 @@ class Profiler extends AbstractBlock
     protected function _getTreeProfiler()
     {
         $tree = [];
-        $timers = $this->_profiler->getTimers();
-        foreach ($timers as $k => $line) {
-            $parts = explode('->', $k);
+        if (isset($this->_profiler)) {
+            $timers = $this->_profiler->getTimers();
+            foreach ($timers as $k => $line) {
+                $parts = explode('->', $k);
 
-            $cursor =& $tree;
-            foreach ($parts as $i => $part) {
-                if (!isset($cursor[$part]) || !is_array($cursor[$part])) {
-                    $cursor[$part]['children'] = [];
-                }
-                if (($i + 1) === count($parts)) {
-                    $cursor[$part]['data'] = $line;
-                }
+                $cursor =& $tree;
+                foreach ($parts as $i => $part) {
+                    if (!isset($cursor[$part]) || !is_array($cursor[$part])) {
+                        $cursor[$part]['children'] = [];
+                    }
+                    if (($i + 1) === count($parts)) {
+                        $cursor[$part]['data'] = $line;
+                    }
 
-                $cursor =& $cursor[$part]['children'];
+                    $cursor =& $cursor[$part]['children'];
+                }
             }
         }
 

@@ -33,7 +33,7 @@ abstract class AbstractBlock extends Toolbar
         DirectoryList $directory,
         array $data = []
     ) {
-        $this->_profiler = $_SERVER['SGA_PROFILER'];
+        $this->_profiler = isset($_SERVER['SGA_PROFILER']) ? $_SERVER['SGA_PROFILER'] : null;
         $this->_helperRegister = $helperRegister;
         $this->_helperData = $helperData;
         $this->_productMetaData = $productMetaData;
@@ -91,7 +91,7 @@ abstract class AbstractBlock extends Toolbar
 
     protected function _getScales()
     {
-        if (!isset($this->_scale)) {
+        if (!isset($this->_scale) && isset($this->_profiler)) {
             $max = 0;
             $sum = 0;
 
@@ -124,12 +124,14 @@ abstract class AbstractBlock extends Toolbar
         $scales = $this->_getScales();
 
         $class = '';
-        if ($time > $scales['start'] && $time <= $scales['start'] + $scales['step']) {
-            $class = ' min';
-        } elseif ($time > $scales['start'] + $scales['step'] && $time <= $scales['start'] + $scales['step'] * 2) {
-            $class = ' moy';
-        } elseif ($time > $scales['start'] + $scales['step'] * 2) {
-            $class = ' max';
+        if (isset($scales['start']) && isset($scales['step'])) {
+            if ($time > $scales['start'] && $time <= $scales['start'] + $scales['step']) {
+                $class = ' min';
+            } elseif ($time > $scales['start'] + $scales['step'] && $time <= $scales['start'] + $scales['step'] * 2) {
+                $class = ' moy';
+            } elseif ($time > $scales['start'] + $scales['step'] * 2) {
+                $class = ' max';
+            }
         }
 
         return $class;
