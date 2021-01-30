@@ -68,17 +68,13 @@ class Generate
 
     protected function _canDisplay()
     {
-        if (!$this->_helperData->isEnable()) {
-            return false;
-        }
-
         // is ajax request
         if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
             return false;
         }
 
         // is not index.php
-        if ($_SERVER['SCRIPT_NAME'] !== '/index.php') {
+        if (strpos($_SERVER['SCRIPT_NAME'], '/index.php') <= 0) {
             return false;
         }
 
@@ -93,7 +89,11 @@ class Generate
     protected function _canRender()
     {
         // is not index.php
-        if ($_SERVER['SCRIPT_NAME'] === '/static.php') {
+        if (strpos($_SERVER['SCRIPT_NAME'], '/static.php') > 0) {
+            return false;
+        }
+
+        if (!$this->_helperData->isEnable()) {
             return false;
         }
 

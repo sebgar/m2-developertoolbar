@@ -6,7 +6,7 @@ if (PHP_SAPI !== 'cli') {
             'drivers' => [
                 [
                     'output' => 'Sga\DeveloperToolbar\Model\Profiler\Driver\Output\DevNull',
-                    'stat'   => $_SERVER['SGA_PROFILER'],
+                    'stat' => $_SERVER['SGA_PROFILER'],
                 ]
             ]
         ],

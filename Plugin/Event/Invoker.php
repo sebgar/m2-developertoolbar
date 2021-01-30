@@ -20,11 +20,15 @@ class Invoker
 
     public function beforeDispatch(Subject $subject, $observerConfig, $wrapper)
     {
-        $this->_helperRegister->addObserver($observerConfig, $wrapper, true);
+        if ($this->_helperData->isEnable()) {
+            $this->_helperRegister->addObserver($observerConfig, $wrapper, true);
+        }
     }
 
     public function afterDispatch(Subject $subject, $result, $observerConfig, $wrapper)
     {
-        $this->_helperRegister->addObserver($observerConfig, $wrapper, false);
+        if ($this->_helperData->isEnable()) {
+            $this->_helperRegister->addObserver($observerConfig, $wrapper, false);
+        }
     }
 }

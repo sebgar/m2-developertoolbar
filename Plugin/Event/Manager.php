@@ -20,11 +20,15 @@ class Manager
 
     public function beforeDispatch(Subject $subject, $eventName, $data=[])
     {
-        $this->_helperRegister->addEvent($eventName, $data, true);
+        if ($this->_helperData->isEnable()) {
+            $this->_helperRegister->addEvent($eventName, $data, true);
+        }
     }
 
     public function afterDispatch(Subject $subject, $result, $eventName, $data=[])
     {
-        $this->_helperRegister->addEvent($eventName, $data, false);
+        if ($this->_helperData->isEnable()) {
+            $this->_helperRegister->addEvent($eventName, $data, false);
+        }
     }
 }

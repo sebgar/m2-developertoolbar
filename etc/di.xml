@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    <preference for="\Magento\Framework\Profiler" type="Sga\DeveloperToolbar\Model\Profiler" />
-
-    <type name="Magento\Framework\App\Response\Http">
-        <plugin name="sga_developertoolbar_generate" type="Sga\DeveloperToolbar\Plugin\Generate" sortOrder="99999"/>
-    </type>
-</config>

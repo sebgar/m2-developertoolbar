@@ -22,11 +22,6 @@ class Data extends AbstractHelper
 
     public function isEnable()
     {
-        // is not enable in bo
-        if ($this->_appState->getAreaCode() === 'adminhtml' && !$this->_helperConfig->isEnabledBo()) {
-            return false;
-        }
-
         // is not enable in fo
         if ($this->_appState->getAreaCode() === 'frontend' && !$this->_helperConfig->isEnabledFo()) {
             return false;

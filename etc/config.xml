@@ -3,7 +3,6 @@
     <default>
         <dev>
             <sga_developertoolbar>
-                <enabled_bo>0</enabled_bo>
                 <enabled_fo>1</enabled_fo>
             </sga_developertoolbar>
         </dev>

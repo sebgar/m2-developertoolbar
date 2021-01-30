@@ -4,10 +4,6 @@
         <section id="dev">
             <group id="sga_developertoolbar" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Developer Toolbar</label>
-                <field id="enabled_bo" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
-                    <label>Enabled In BO</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
                 <field id="enabled_fo" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Enabled In FO</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>

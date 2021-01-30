@@ -16,6 +16,10 @@ $store = $block->getStore();
     <div id="dtt_tab_request<?= $block->getRequestKey() ?>" class="dtt-tab-container dtt-request-request">
         <table class="dtt-table">
             <tr>
+                <td>Date</td>
+                <td><?= $block->formatDate(null, \IntlDateFormatter::MEDIUM, true) ?></td>
+            </tr>
+            <tr>
                 <td>Website</td>
                 <td><?= $website->getName().' / code : '.$website->getCode().' / id : '.$website->getId() ?></td>
             </tr>
