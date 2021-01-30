@@ -12,6 +12,7 @@
     "require": {
         "php": ">=7.0"
     },
+    "license": "proprietary",
     "minimum-stability": "stable",
     "autoload": {
         "files": [
