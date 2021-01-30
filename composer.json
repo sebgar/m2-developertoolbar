@@ -1,6 +1,5 @@
 {
     "name": "sebgar/m2-developertoolbar",
-    "type": "library",
     "description": "Magento 2 Developer Toolbar",
     "authors": [
         {
@@ -8,7 +7,18 @@
             "email": "sebastien.garrouste@gmail.com"
         }
     ],
+    "type": "magento2-module",
+    "version": "1.0.0",
     "require": {
         "php": ">=7.0"
+    },
+    "minimum-stability": "dev",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Sga\\DeveloperToolbar\\": ""
+        }
     }
 }
