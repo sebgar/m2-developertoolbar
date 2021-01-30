@@ -74,7 +74,7 @@ class Generate
         }
 
         // is not index.php
-        if (strpos($_SERVER['SCRIPT_NAME'], '/index.php') <= 0) {
+        if (strpos($_SERVER['SCRIPT_NAME'], '/index.php') === false) {
             return false;
         }
 
