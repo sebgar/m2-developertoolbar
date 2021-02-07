@@ -2,6 +2,8 @@
 
 Toolbar Magento 2
 
+[documentation](doc/doc.md)
+
 ## Installation
 
 Via composer
