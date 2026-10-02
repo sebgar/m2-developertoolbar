@@ -41,4 +41,9 @@ class Stat extends BaseStat
 
         return $timeEnd - $timeStart;
     }
+
+    public function __toString()
+    {
+        return '';
+    }
 }

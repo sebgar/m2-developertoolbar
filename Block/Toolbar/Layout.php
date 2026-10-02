@@ -118,7 +118,7 @@ class Layout extends AbstractBlock
                     if ((string)$b->getCacheLifetime() !== '') {
                         $block['lifetime'] = $b->getCacheLifetime();
                     }
-                    $block['file'] = str_replace($this->_directory->getRoot(), '', $b->getTemplateFile());
+                    $block['file'] = str_replace($this->_directory->getRoot(), '', (string)$b->getTemplateFile());
                     $block['class_name'] = get_class($b);
                     if (!empty($block['class_name'])) {
                         $reflectionClass = new \ReflectionClass($b);

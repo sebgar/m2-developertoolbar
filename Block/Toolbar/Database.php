@@ -88,7 +88,7 @@ class Database extends AbstractBlock
         $str = $query->getQuery();
         if (count($query->getQueryParams()) > 0) {
             foreach ($query->getQueryParams() as $k => $v) {
-                $str = str_replace($k, $v, $str);
+                $str = str_replace((string)$k, (string)$v, (string)$str);
             }
         }
 
